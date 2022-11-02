@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="todo.css" />
+  </head>
+  <body>
+    <main>
+      <div class="todo">
+        <h1>TODO LIST With Js</h1>
+        <label for="name">Name</label>
+        <div class="formdetail">
+          <input type="text" required id="todoval" placeholder="Enter Your List" />
+        </div>
+        <label for="des">Description  </label>
+        <div class="formdetail">
+          <textarea name="" id="desval" cols="30" rows="4" placeholder="Enter Your Description"></textarea>
+        </div>
+        <div class="btn">
+          <button onclick="generateList()">Add To List</button>
+          <button id="clear">Clear List</button>
+        </div>
+      </div>
+      <div class="result">
+        <table id="result">
+          <tr>  
+            <th>Name</th>
+            <th>Description</th>
+            <th>Times</th>
+            <th>Components</th>
+          </tr>
+        </table>
+      </div>
+    </main>
+  </body>
+  <script>
+    function generateList() {
+      
+      // Definning Value OF Things
+
+      var val = document.getElementById("todoval");
+      var desval = document.getElementById("desval");
+      var answer = document.getElementById("result");
+      var clear = document.getElementById("clear");
+
+      // Making A Div With The Help Of DOM
+
+      var div = document.createElement("tr");
+      div.setAttribute("id", "newresult");
+
+      // Making A Button of Edit
+
+      var edit = document.createElement("button");
+      var edittext = document.createTextNode("Edit");
+      edit.setAttribute("class", "edit");
+      edit.appendChild(edittext);
+
+      // Making A Delete Button
+
+      var deletebtn = document.createElement("button");
+      var text = document.createTextNode("Delete");
+      deletebtn.setAttribute("class", "delete");
+      deletebtn.appendChild(text);
+
+      // Making Array For Month And Day
+      function getMonthName(monthnumber){
+        var monthname = [
+          "Janauary",
+          "Febrary",
+          "March",
+          "April",
+          "May",
+          "June",
+        "July",
+        "Septmber",
+        "August",
+        "October",
+        "November",
+        "Decemer"
+      ]
+      return monthname[monthnumber]
+      }
+      function getdayName(daynumber){
+        var dayname = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+      ]
+      return dayname[daynumber]
+      }
+
+      // Apending Child ()
+
+      var date = new Date();
+      var tareekh = date.getDate();
+      var maheena = date.getMonth();
+      var din = date.getDay();
+      console.log(getMonthName(maheena) +  " " +  tareekh + " / "+ getdayName(din) );
+      console.log(date);
+      div.innerHTML = `<td>${val.value}</td> <td>  ${desval.value}</td><td>${getMonthName(maheena)}  ${tareekh}  / ${getdayName(din)}</td>`;
+      div.appendChild(edit);
+      div.appendChild(deletebtn);
+      answer.appendChild(div)
+
+      // Consoleing The Thing to Check Working
+
+      console.log(div);
+
+      // Adding EeventListner() To DeleteBtn
+      
+      deletebtn.addEventListener('click' , function deletefunc(ss) {
+        div.style.display = "none";
+      });
+
+      val.value = "  "
+      desval.value = "  "
+      
+      // Adding EventListner to Clear Btn
+
+      clear.addEventListener('click' , function clear(){
+        div.innerHTML = " "
+      });
+    }
+ 
+  </script>
+</html>
